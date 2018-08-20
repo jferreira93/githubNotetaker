@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import api from '../Utils/api';
+import Profile from './Profile';
 
 const styles = {
   container: {
@@ -40,13 +41,17 @@ export default class Dashboard extends React.Component{
   }
 
   goToProfile(){
-
+    this.props.navigator.push({
+      title: 'Profile Page',
+      component: Profile,
+      passProps: { userInfo: this.props.userInfo }
+    });
   }
   goToRepos(){
 
   }
   goToNotes(){
-    
+
   }
   render(){
     return(
