@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableHighlight, Navigator } from 'react-native';
 import api from '../Utils/api';
 import Profile from './Profile';
+import Repositories from './Repositories';
 
 const styles = {
   container: {
@@ -48,7 +49,17 @@ export default class Dashboard extends React.Component{
     });
   }
   goToRepos(){
-
+    api.getRepos(this.props.userInfo.login)
+      .then((res) => {
+        this.props.navigator.push({
+          title: 'Repos',
+          component: Repositories,
+          passProps: { 
+            userInfo: this.props.userInfo,
+            repos: res
+          }
+        });
+    });
   }
   goToNotes(){
 
