@@ -1,6 +1,7 @@
 import React from 'react';
 import Badge from './Badge';
 import Separator from './Helpers/Separator';
+import Web_View from './Helpers/WebView';
 import { ScrollView, Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -31,7 +32,11 @@ const styles = StyleSheet.create({
 
 export default class Repositories extends React.Component {
   openPage(url){
-    //
+    this.props.navigator.push({
+      component: Web_View,
+      title: 'Web View',
+      passProps: {url}
+    });
   }
   render(){
     let repos = this.props.repos;

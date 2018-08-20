@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Image, TouchableHighlight, Navigator } from 're
 import api from '../Utils/api';
 import Profile from './Profile';
 import Repositories from './Repositories';
+import Notes from './Notes';
 
 const styles = {
   container: {
@@ -62,7 +63,18 @@ export default class Dashboard extends React.Component{
     });
   }
   goToNotes(){
-
+    api.getNotes(this.props.userInfo.login)
+      .then((res) => {
+        res = res || {};
+        this.props.navigator.push({
+          component: Notes, 
+          title: "Notes",
+          passProps: {
+            notes: res, 
+            userInfo: this.props.userInfo
+          }
+        })
+      });
   }
   render(){
     return(
